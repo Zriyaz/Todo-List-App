@@ -37,13 +37,27 @@ class  App extends React.Component{
     );
   };
   clearList = () => {
-    console.log("clear list ");
+    this.setState({
+      items:[]
+    })
   };
   handleDelete = id => {
-    console.log(`handle edit ${id}`);
+    const filteredItems= this.state.items.filter(item=>item.id!==id) 
+    this.setState({
+      items:filteredItems
+    })
+
   };
   handleEdit = id => {
-    console.log(`edit edit ${id}`);
+    const filteredItems= this.state.items.filter(item=>item.id!==id)
+    const selectedItem=this.state.items.find(item=>item.id===id)
+    console.log(selectedItem) 
+    this.setState({
+      items:filteredItems,
+      item:selectedItem.title,
+      id:id,
+      editItem:true
+    })
   };
 
  render(){
@@ -51,10 +65,10 @@ class  App extends React.Component{
     <div className="container">
       <div className="row">
        <div className="col-10 mx-auto col-md-8 mt-5 ">
-        <h3 className="text-capitalize text-center">Tod List </h3>
+        <h3 className="text-capitalize text-center">Todo list Project </h3>
          <TodoInput
           item={this.state.item} 
-          handleChnage={this.handleChange}
+          handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           editItem={this.state.editItem} 
           />
